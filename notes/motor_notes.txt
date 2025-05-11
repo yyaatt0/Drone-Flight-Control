@@ -1,0 +1,66 @@
+Quadcopter Dynamics
+
+Throttle Input (Will have to test)
+    Send PWM signal 
+    0% = 1000 us
+    100% = 2000 us
+
+Stable Position
+    Top Left = Counter Clockwise, 50% Power
+    Top Right = Clockwise, 50% Power
+    Bottom Left = Clockwise, 50% Power
+    Bottom Right = Counter Clockwise, 50% Power
+
+Increase Altitude 
+    Top Left = Counter Clockwise, 75% Power
+    Top Right = Clockwise, 75% Power
+    Bottom Left = Clockwise, 75% Power
+    Bottom Right = Counter Clockwise, 75% Power
+
+Decrease Altitude
+    Top Left = Counter Clockwise, 25% Power
+    Top Right = Clockwise, 25% Power
+    Bottom Right = Clockwise, 25% Power
+    Bottom Left = Counter Clockwise, 25% Power
+
+
+(Most likely will not use the roll motions)
+
+Same Altitude Roll RIGHT Motion
+    Top Left = Counter Clockwise, 75% Power
+    Top Right = Clockwise, 25% Power
+    Bottom Left = Clockwise, 75% Power
+    Bottom Right = Counter Clockwise, 25% Power
+
+Same Altitude Roll LEFT Motion 
+    Top Left = Counter Clockwise, 25% Power
+    Top Right = Clockwise, 75% Power
+    Bottom Left = Clockwise, 25% Power
+    Bottom Right = Counter Clockwise, 75% Power
+
+Same Altitude Pitch FORWARD Motion
+    Top Left = Counter Clockwise, 25% Power
+    Top Right = Clockwise, 25% Power
+    Bottom Left = Clockwise, 75% Power
+    Bottom Right = Counter Clockwise, 75% Power
+
+Same Altitude Pitch BACKWARD Motion
+    Top Left = Counter Clockwise, 75% Power
+    Top Right = Clockwise, 75% Power
+    Bottom Left = Clockwise, 25% Power
+    Bottom Right = Counter Clockwise, 25% Power
+
+Same Altitude Yaw COUNTER CLOCKWISE Motion
+    Top Left = Counter Clockwise, 25% Power
+    Top Right = Clockwise, 75% Power
+    Bottom Left = Clockwise, 75% Power
+    Bottom Right = Counter Clockwise, 25% Power
+
+Same Altitude Yaw CLOCKWISE Motion
+    Top Left = Counter Clockwise, 75% Power
+    Top Right = Clockwise, 25% Power
+    Bottom Left = Clockwise, 25% Power
+    Bottom Right = Counter Clockwise, 75% Power
+
+
+Top Right Motor gets funny when I set to 1500 throttle
