@@ -195,55 +195,54 @@ blue_led.value = False
 
 time.sleep(2)
 
-''' Initial loop to get the drone into the air and stable'''
-
-while True:
-    while(adc_voltage(front_ir.value) < 2.0):
-        set_all_motor(top_r, top_l, bottom_r, bottom_l, throttle, throttle, throttle, throttle)
-        time.sleep(dt)
-    set_all_motor(top_r, top_l, bottom_r, bottom_l, 0, 0, 0, 0)
-    time.sleep(dt)
+''' This loop demonstrates the IR sensor controlling the drone '''
+# while True:
+#     while(adc_voltage(front_ir.value) < 2.0):
+#         set_all_motor(top_r, top_l, bottom_r, bottom_l, throttle, throttle, throttle, throttle)
+#         time.sleep(dt)
+#     set_all_motor(top_r, top_l, bottom_r, bottom_l, 0, 0, 0, 0)
+#     time.sleep(dt)
     
     
-# for throttle in range(1000, 1800, 50):
-#     set_all_motor(top_r, top_l, bottom_r, bottom_l, throttle, throttle, throttle, throttle)
-#     time.sleep(1)
+for throttle in range(1000, 1800, 50):
+    set_all_motor(top_r, top_l, bottom_r, bottom_l, throttle, throttle, throttle, throttle)
+    time.sleep(1)
 
 start_time = time.time()
 
-# while True:
-# while (time.time() - start_time < timeout_time):
-#     height = vl53_sensor.distance
-#     x_accel, y_accel, z_accel = lsm_sensor.acceleration
-#     x_gyro, y_gyro, z_gyro = lsm_sensor.gyro
-#     x_gyro -= x_gyro_bias
-#     y_gyro -= y_gyro_bias
-#     z_gyro -= z_gyro_bias
+''' Initial loop to get the drone into the air and stable'''
+while (time.time() - start_time < timeout_time):
+    height = vl53_sensor.distance
+    x_accel, y_accel, z_accel = lsm_sensor.acceleration
+    x_gyro, y_gyro, z_gyro = lsm_sensor.gyro
+    x_gyro -= x_gyro_bias
+    y_gyro -= y_gyro_bias
+    z_gyro -= z_gyro_bias
     
-#     # Getting clean data and smoother data
-#     filtered_pitch, filtered_roll = get_filtered_pitch_roll(filtered_pitch, filtered_roll, x_accel, y_accel, z_accel, x_gyro, y_gyro, tau, dt)
+    # Getting clean data and smoother data
+    filtered_pitch, filtered_roll = get_filtered_pitch_roll(filtered_pitch, filtered_roll, x_accel, y_accel, z_accel, x_gyro, y_gyro, tau, dt)
     
-#     # Getting updated values to update the error
-#     pitch_output = pitch_pid.update(flat_pitch, filtered_pitch, dt)
-#     roll_output = roll_pid.update(flat_roll, filtered_pitch, dt)
-#     thrust_output = thrust_pid.update(target_altitude, height, dt)
+    # Getting updated values to update the error
+    pitch_output = pitch_pid.update(flat_pitch, filtered_pitch, dt)
+    roll_output = roll_pid.update(flat_roll, filtered_pitch, dt)
+    thrust_output = thrust_pid.update(target_altitude, height, dt)
     
-#     ''' Throttle Altitude PID '''
-#     # Calculates the throttle to update
-#     top_r_throttle = base_throttle_r + thrust_output + pitch_output + roll_output 
-#     top_l_throttle = base_throttle_l + thrust_output + pitch_output - roll_output
-#     bottom_r_throttle = base_throttle_r + thrust_output - pitch_output + roll_output
-#     bottom_l_throttle = base_throttle_l + thrust_output - pitch_output - roll_output
+    ''' Throttle Altitude PID '''
+    # Calculates the throttle to update
+    top_r_throttle = base_throttle_r + thrust_output + pitch_output + roll_output 
+    top_l_throttle = base_throttle_l + thrust_output + pitch_output - roll_output
+    bottom_r_throttle = base_throttle_r + thrust_output - pitch_output + roll_output
+    bottom_l_throttle = base_throttle_l + thrust_output - pitch_output - roll_output
     
-#     # Sets the throttle to the motors
-#     set_all_motor(top_r, top_l, bottom_r, bottom_l, top_r_throttle, top_l_throttle, bottom_r_throttle, bottom_l_throttle)
+    # Sets the throttle to the motors
+    set_all_motor(top_r, top_l, bottom_r, bottom_l, top_r_throttle, top_l_throttle, bottom_r_throttle, bottom_l_throttle)
     
-#     # For personal reference if the motors are off
-#     # print(f"Filtered Pitch: {filtered_pitch}, Filtered Roll: {filtered_roll}, Altitude: {height}, IR Value: {adc_voltage(front_ir.value)}")
-#     print(f"top_r: {top_r_throttle}, top_l: {top_l_throttle}, botton_r: {bottom_r_throttle}, bottom_l: {bottom_l_throttle}, Altitude: {height}, Error: {thrust_pid.previous_error}")
-#     time.sleep(dt)
+    # For personal reference if the motors are off
+    # print(f"Filtered Pitch: {filtered_pitch}, Filtered Roll: {filtered_roll}, Altitude: {height}, IR Value: {adc_voltage(front_ir.value)}")
+    print(f"top_r: {top_r_throttle}, top_l: {top_l_throttle}, botton_r: {bottom_r_throttle}, bottom_l: {bottom_l_throttle}, Altitude: {height}, Error: {thrust_pid.previous_error}")
+    time.sleep(dt)
     
-# ''' Middle loop for the companion logic part '''
+''' Middle loop for the companion logic part '''
 # yellow_led.value = False
 # green_led.value = False
 # blue_led.value = True
@@ -285,7 +284,7 @@ start_time = time.time()
 #     print(f"Filtered Pitch: {filtered_pitch}, Filtered Roll: {filtered_roll}, Altitude: {height}, IR Value: {adc_voltage(front_ir.value)}")
 #     time.sleep(dt)
 
-# ''' Final loop to decend the drone safely '''
+''' Final loop to decend the drone safely '''
 # target_altitude = 0.0
 # yellow_led.value = True
 # green_led.value = False
@@ -322,5 +321,5 @@ start_time = time.time()
 #     print(f"Filtered Pitch: {filtered_pitch}, Filtered Roll: {filtered_roll}, Altitude: {height}, IR Value: {adc_voltage(front_ir.value)}")
 #     time.sleep(dt)
     
-# # Ensuring the motors' throttle is actually set to zero after given like 10 seconds to decend 
+# Ensuring the motors' throttle is actually set to zero after given like 10 seconds to decend 
 # set_all_motor(top_r, top_l, bottom_r, bottom_l, 1000, 1000, 1000, 1000)
